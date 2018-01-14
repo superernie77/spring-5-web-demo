@@ -36,7 +36,7 @@ public class Spring5WebApplication {
 		
 		RequestPredicate pred = request -> request.path().equals("/hello-world");
 		
-		HandlerFunction<ServerResponse> handler = request ->ok()
+		HandlerFunction<ServerResponse> handler = request ->ok().build();
  
 		
 		RouterFunction<ServerResponse> helloWorldRoute = RouterFunctions.route(pred,handler);

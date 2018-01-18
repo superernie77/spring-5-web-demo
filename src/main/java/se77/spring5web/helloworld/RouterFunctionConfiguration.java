@@ -35,12 +35,6 @@ public class RouterFunctionConfiguration {
 		return routerFunction;
 	}
 
-	public Flux<String> fooBarFluxFromValues() {
-		return Flux.fromIterable(Arrays.asList("foo", "bar"));
-	}
 	
-	Flux<Long> counter() {
-		return Flux.interval(Duration.ofSeconds(10l));
-	}
 
 }

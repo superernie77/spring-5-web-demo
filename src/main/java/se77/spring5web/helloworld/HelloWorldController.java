@@ -11,12 +11,13 @@ import reactor.core.publisher.Mono;
 public class HelloWorldController {
 
 	/**
-	 * REST-Controller mapping the /just-hello URL
+	 * REST-Controller mapping the /just-hello URL and return a simple Mono containing a String
+	 * 
 	 * @return
 	 */
-  @GetMapping("/just-hello")
-  @ResponseBody
-  public Publisher<String> handler() {
-      return Mono.just("Hello world!");
-  }
+	@GetMapping("/just-hello")
+	@ResponseBody
+	public Publisher<String> handler() {
+		return Mono.just("Hello world!");
+	}
 }

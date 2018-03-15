@@ -1,4 +1,4 @@
-package supere77.spring5web;
+package se77.spring5web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

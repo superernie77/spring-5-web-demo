@@ -5,6 +5,11 @@ import java.util.Arrays;
 
 import reactor.core.publisher.Flux;
 
+/**
+ * Creates some Fluxes with the standard reactor core API.
+ * @author superernie77
+ *
+ */
 public class FluxExamples {
 
 	public Flux<String> fooBarFluxFromList() {

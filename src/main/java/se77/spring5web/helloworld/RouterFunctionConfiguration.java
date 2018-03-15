@@ -9,6 +9,11 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import reactor.core.publisher.Mono;
 
+/**
+ * Examples for Spring 5 Router- and HandlerFunctions.
+ * @author superernie77
+ *
+ */
 @Configuration
 public class RouterFunctionConfiguration {
 

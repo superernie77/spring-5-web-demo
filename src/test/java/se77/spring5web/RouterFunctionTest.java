@@ -2,37 +2,54 @@ package se77.spring5web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import se77.spring5web.helloworld.RouterFunctionConfiguration;
+
 /**
  * Calls the reactive URLs defined in the RouterFunctionConfiguration.
+ * 
  * @author superernie77
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RouterFunctionTest {
-	
+
+	// Definition of the RouterFunctions
+	@Autowired
+	private RouterFunctionConfiguration context;
+
 	@Test
 	public void testHelloWorldFunction() {
-		WebTestClient client = WebTestClient.bindToServer().baseUrl("http://localhost:8080").build();
-		
-		client.get().uri("/books").exchange().expectStatus().isOk();
+		WebTestClient client = WebTestClient.bindToRouterFunction(context.booksRouterFunction()).build();
+		client.get().uri("/books")
+			.exchange().expectStatus().isOk();
 	}
-	
+
 	@Test
 	public void testHelloWorldFunction2() {
-		WebTestClient client = WebTestClient.bindToServer().baseUrl("http://localhost:8080").build();
+		WebTestClient client = WebTestClient.bindToRouterFunction(context.helloRouterFunction()).build();
 		
-		client.get().uri("/hello-again").exchange().expectStatus().isOk();
+		client.get().uri("/hello-again")
+			.exchange().expectStatus().isOk();
 	}
-	
+
 	@Test
-	public void testHelloWorldFunction3() {
-		WebTestClient client = WebTestClient.bindToServer().baseUrl("http://localhost:8080").build();
-		
-		client.get().uri("/just-hello").exchange().expectStatus().isOk();
+	public void testChainedPredicate() {
+		WebTestClient client = WebTestClient.bindToRouterFunction(context.chainedRequestPredicate()).build();
+
+		// this should work because url and method is correct
+		client.get().uri("/chained-books")
+			.exchange().expectStatus().isOk();
+
+		// this is not mapped
+		client.post().uri("/chained-books").exchange()
+			.expectStatus().isNotFound();
+
 	}
 }

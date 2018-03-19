@@ -1,14 +1,23 @@
 package se77.spring5web.helloworld;
 
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
+import static org.springframework.web.reactive.function.server.RouterFunctions.*;
+import static org.springframework.web.reactive.function.server.ServerResponse.*;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.reactive.function.server.HandlerFunction;
+import org.springframework.web.reactive.function.server.RequestPredicate;
 import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -51,5 +60,17 @@ public class RouterFunctionConfiguration {
 
 		return routerFunction;
 				
+	}
+	
+	@Bean
+	public RouterFunction<ServerResponse> multipleHttpMethodsFunction(){
+		
+		List<String> result = Arrays.asList("Klaus", "Kurt", "Ernie");
+		
+		RouterFunction<ServerResponse> router = RouterFunctions.nest(path("/names"),
+				route(GET("/"), request -> ok().body(Flux.fromIterable(result), String.class) ))
+				.andRoute(POST("/"), request -> request.bodyToMono(String.class).doOnNext( s -> result.add(s)).then(ok().build()));
+		
+		return router;
 	}
 }

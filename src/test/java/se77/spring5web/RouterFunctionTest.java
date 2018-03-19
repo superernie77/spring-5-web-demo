@@ -1,5 +1,6 @@
 package se77.spring5web;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import reactor.core.publisher.Mono;
 import se77.spring5web.helloworld.RouterFunctionConfiguration;
 
 /**
@@ -50,6 +52,22 @@ public class RouterFunctionTest {
 		// this is not mapped
 		client.post().uri("/chained-books").exchange()
 			.expectStatus().isNotFound();
-
+	}
+	
+	//@Test
+	public void testMultipleHttpMethods() {
+		WebTestClient client = WebTestClient.bindToRouterFunction(context.multipleHttpMethodsFunction()).build();
+		
+		client.get().uri("/names")
+		.exchange()
+		.expectStatus().isOk()
+		.expectBody(String.class).consumeWith(  s -> Assert.assertEquals("KlausKurtErnie", s));
+		
+		
+		client.post()
+			.uri("/names")
+			.syncBody("Felix")
+			.exchange()
+			.expectStatus().isOk();
 	}
 }

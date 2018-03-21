@@ -68,5 +68,10 @@ public class RouterFunctionTest {
 			.syncBody("Felix")
 			.exchange()
 			.expectStatus().isOk();
+		
+		client.get().uri("/names")
+		.exchange()
+		.expectStatus().isOk()
+		.expectBodyList(String.class).consumeWith(System.out::println);
 	}
 }

@@ -4,6 +4,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.*;
 import static org.springframework.web.reactive.function.server.ServerResponse.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,11 +66,11 @@ public class RouterFunctionConfiguration {
 	@Bean
 	public RouterFunction<ServerResponse> multipleHttpMethodsFunction(){
 		
-		List<String> result = Arrays.asList("Klaus", "Kurt", "Ernie");
+		List<String> result = new ArrayList<>(Arrays.asList("Klaus", "Kurt", "Ernie"));
 		
-		RouterFunction<ServerResponse> router = RouterFunctions.nest(path("/names"),
-				route(GET("/"), request -> ok().body(Flux.fromIterable(result), String.class) ))
-				.andRoute(POST("/"), request -> request.bodyToMono(String.class).doOnNext( s -> result.add(s)).then(ok().build()));
+		RouterFunction<ServerResponse> router = RouterFunctions
+				.route(GET("/names"), request -> ok().body(Flux.fromIterable(result), String.class) )
+				.andRoute(POST("/names"), request -> request.bodyToMono(String.class).doOnNext( s -> result.add(s)).then(ok().build()));
 		
 		return router;
 	}

@@ -68,8 +68,8 @@ public class RouterFunctionConfiguration {
 		
 		List<String> result = new ArrayList<>(Arrays.asList("Klaus", "Kurt", "Ernie"));
 		
-		RouterFunction<ServerResponse> router = RouterFunctions
-				.route(GET("/names"), request -> ok().body(Flux.fromIterable(result), String.class) )
+		RouterFunction<ServerResponse> router = 
+				route(GET("/names"), request -> ok().body(Flux.fromIterable(result), String.class) )
 				.andRoute(POST("/names"), request -> request.bodyToMono(String.class).doOnNext( s -> result.add(s)).then(ok().build()));
 		
 		return router;

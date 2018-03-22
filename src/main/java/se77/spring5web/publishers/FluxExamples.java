@@ -1,7 +1,9 @@
-package se77.spring5web.examples;
+package se77.spring5web.publishers;
 
 import java.time.Duration;
 import java.util.Arrays;
+
+import org.springframework.stereotype.Component;
 
 import reactor.core.publisher.Flux;
 
@@ -10,6 +12,7 @@ import reactor.core.publisher.Flux;
  * @author superernie77
  *
  */
+@Component
 public class FluxExamples {
 
 	public Flux<String> fooBarFluxFromList() {
@@ -21,7 +24,7 @@ public class FluxExamples {
 	}
 	
 	public Flux<String> fromValues(){
-		return Flux.just("foo","bar");
+		return Flux.just("foo","bar","foo","bar");
 	}
 	
 	public Flux<String> error(){

@@ -1,4 +1,4 @@
-package se77.spring5web.helloworld;
+package se77.spring5web.endpoints;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.*;
@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.reactive.function.server.HandlerFunction;
-import org.springframework.web.reactive.function.server.RequestPredicate;
 import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
@@ -27,7 +26,7 @@ import reactor.core.publisher.Mono;
  *
  */
 @Configuration
-public class RouterFunctionConfiguration {
+public class RouterFunctionConfig {
 
 	/**
 	 * Another hello-world URL, this time created with a RouterFunction.

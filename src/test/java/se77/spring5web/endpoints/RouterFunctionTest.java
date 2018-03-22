@@ -1,6 +1,5 @@
-package se77.spring5web;
+package se77.spring5web.endpoints;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import se77.spring5web.helloworld.RouterFunctionConfiguration;
+import se77.spring5web.endpoints.RouterFunctionConfig;
 
 /**
  * Calls the reactive URLs defined in the RouterFunctionConfiguration.
@@ -23,7 +22,7 @@ public class RouterFunctionTest {
 
 	// Definition of the RouterFunctions
 	@Autowired
-	private RouterFunctionConfiguration context;
+	private RouterFunctionConfig context;
 
 	@Test
 	public void testHelloWorldFunction() {

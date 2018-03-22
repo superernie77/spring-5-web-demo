@@ -1,4 +1,4 @@
-package se77.spring5web.helloworld;
+package se77.spring5web.endpoints;
 
 import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import reactor.core.publisher.Mono;
 
 @Controller
-public class HelloWorldController {
+public class SimpleReactiveRestController {
 
 	/**
 	 * REST-Controller mapping the /just-hello URL and return a simple Mono containing a String

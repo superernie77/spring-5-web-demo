@@ -1,4 +1,4 @@
-package se77.spring5web.examples;
+package se77.spring5web.publishers;
 
 import reactor.core.publisher.Mono;
 

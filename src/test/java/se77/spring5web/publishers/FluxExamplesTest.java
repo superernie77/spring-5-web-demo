@@ -26,6 +26,28 @@ public class FluxExamplesTest {
 	private FluxExamples examplesFactory;
 	
 	@Test
+	public void testZip2Fluxes() {
+		
+		
+		
+		Flux<String> flux =	examplesFactory.fooBarFluxFromList(); // two elements
+		Flux<String> flux2 =	examplesFactory.fromValues(); // vour elements
+		
+		List<String> elements = new ArrayList<>();
+		flux.log().zipWith(flux2,  (s1 , s2) -> String.format("First Flux: %s, Second Flux: %s", s1, s2) ).subscribe(elements::add);
+		
+		// only two elements since the ziped flux ends with the second element of the first flux
+		assertTrue(elements.size() == 2);
+		
+		List<String> elements2 = new ArrayList<>();
+		flux2.log().zipWith(flux,  (s1 , s2) -> String.format("First Flux: %s, Second Flux: %s", s1, s2) ).subscribe(elements2::add);
+		
+		// still only two elements since the initial flux has only 2 elements
+		assertTrue(elements2.size() == 2);
+		
+	}
+	
+	@Test
 	public void testSubscribeToFlux() {
 		
 		List<String> elements = new ArrayList<>();

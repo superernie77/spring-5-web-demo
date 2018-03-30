@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import reactor.core.publisher.Flux;
+import se77.spring5web.domain.User;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -28,12 +29,24 @@ public class FluxExamplesTest {
 	public void testSubscribeToFlux() {
 		
 		List<String> elements = new ArrayList<>();
-		Flux<String> flux =	examplesFactory.fromValues();
+		Flux<String> flux =	examplesFactory.fooBarFluxFromList();
 		
 		// subscribe to flux and put elements in the result list
 		flux.log().subscribe(elements::add);
 		
-		// we got the four elements from the flux
+		// we got the two elements from the flux
+		assertTrue(elements.size() == 2);
+	}
+	
+	@Test
+	public void testMapSubsciptionElements() {
+		List<User> elements = new ArrayList<>();
+		
+		Flux<String> flux =	examplesFactory.fromValues();
+		
+		flux.log().map( s -> new User(s)).subscribe(elements::add);
+		
+		// we got the four Users in the list
 		assertTrue(elements.size() == 4);
 	}
 	

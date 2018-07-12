@@ -10,3 +10,5 @@ Simple example using Spring 5's new reactive web API.
 - Spring Webflux
 - Project Reactor
 - JUnit 5 for Tests
+
+Link to Hello-World-URL: https://spring-5-web-example.herokuapp.com/just-hello

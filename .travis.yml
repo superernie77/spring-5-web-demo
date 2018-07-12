@@ -1,2 +1,6 @@
 language: java
 jdk: openjdk8
+
+# the maven wrapper build script fails otherwise with a permission error. strange...
+before_install:
+  - chmod +x mvnw

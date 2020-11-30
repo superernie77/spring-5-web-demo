@@ -18,6 +18,6 @@ public class SimpleReactiveRestController {
 	@GetMapping("/just-hello")
 	@ResponseBody
 	public Publisher<String> handler() {
-		return Mono.just("Hello world!");
+		return Mono.just("Hello world new!");
 	}
 }

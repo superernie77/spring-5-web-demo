@@ -64,7 +64,7 @@ public class RouterFunctionTest {
 		
 		client.post()
 			.uri("/names")
-			.syncBody("Felix")
+			.bodyValue("Felix")
 			.exchange()
 			.expectStatus().isOk();
 		

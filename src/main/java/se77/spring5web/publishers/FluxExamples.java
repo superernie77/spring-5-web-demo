@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
 /**
- * Creates some Fluxes with the standard reactor core API.
+ * Creates some Fluxes with the standard reactor-core API.
  * @author superernie77
  *
  */

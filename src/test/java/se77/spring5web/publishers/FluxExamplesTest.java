@@ -54,8 +54,6 @@ public class FluxExamplesTest {
 		assertTrue(elements.size() == 3);
 		assertTrue(elements2.size() == 3);
 		
-
-
 	}
 
 	@Test
